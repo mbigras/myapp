@@ -1,0 +1,12 @@
+name: Build myapp
+run-name: build-myapp
+on: ["push"]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: build
+        run: docker build --tag=$IMAGE .
+        env:
+          IMAGE: 'myapp:${{ github.sha }}'
